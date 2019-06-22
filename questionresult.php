@@ -4,8 +4,13 @@ while (($questionArray = fgetcsv($file)) !== FALSE) {
   break;
 }
 
-$indexArray = array(1,5,10,17,39);
-
+$indexArray[] = array('position'=>1,'title'=>'Hi There !','tooltip'=>'give your input get career','image'=>'http://192.168.1.158/hackathon/csvdata/image/giphy.gif');
+$indexArray[] = array('position'=>15,'title'=>"Great, thanks for submitting first set of answers. Now let's move forward for next set.",'tooltip'=>'give your input get career','image'=>'http://192.168.1.158/hackathon/csvdata/image/wave.gif');
+$indexArray[] = array('position'=>23,'title'=>'Awesome, you have  Few more steps and you will get your goal','tooltip'=>'give your input get career','image'=>'http://192.168.1.158/hackathon/csvdata/image/basics.gif');
+$indexArray[] = array('position'=>32,'title'=>'You are just awesome ','tooltip'=>'give your input get career','image'=>'http://192.168.1.158/hackathon/csvdata/image/basics.gif');
+$column = array_column($indexArray, 'position');
+//$indexArray = array(1,5,10,17,39);
+array_pop($questionArray);
 $temp = array();
 $i =1;
 $result = array();
@@ -13,12 +18,13 @@ $j = '-1';
 foreach ($questionArray as $question) {
 	$loadder = array();
 
-	if(in_array($i, $indexArray)){
+	if(in_array($i, $column)){
+		$key = array_search($i, $column);
 		$loadder['id'] = 0;
-		$temp['title'] = 'Hi there';
-		$loadder['tooltip'] = 'tip';
+		$loadder['title'] = $indexArray[$key]['title'];
+		$loadder['tooltip'] = $indexArray[$key]['tooltip'];
 		$loadder['type'] = 'loader';
-		$loadder['image'] = 'http://192.168.1.158/hackathon/csvdata/image/hi.gif';
+		$loadder['image'] = $indexArray[$key]['image'];
 		$loadder['option_type']  = 'image';
 		$loadder['options']  = array();
 		$result[] = $loadder;
